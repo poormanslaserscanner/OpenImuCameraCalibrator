@@ -54,4 +54,5 @@ include_directories(${CMAKE_SOURCE_DIR}/include
 
 add_library(OpenImuCameraCalibrator STATIC ${CAMCALIB_SOURCE_FILES})
 target_link_libraries(OpenImuCameraCalibrator apriltag)
+target_link_libraries(OpenImuCameraCalibrator Ceres::ceres)
 add_subdirectory(applications)
