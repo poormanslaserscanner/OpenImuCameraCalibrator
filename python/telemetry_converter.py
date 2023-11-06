@@ -106,9 +106,12 @@ class TelemetryImporter:
         if "GPS5" in stream:
             for g in stream["GPS5"]["samples"]:
                 gps_timestamps_ns.append(g['cts'] * self.ms_to_sec / self.ns_to_sec)
-                lat, long, alt = g["value"][0], g["value"][1], g["value"][2]
-                gps_llh.append([lat,long,alt])
-                gps_prec.append(g["precision"])
+                if g["value"]:
+                    lat, long, alt = g["value"][0], g["value"][1], g["value"][2]
+                    gps_llh.append([lat,long,alt])
+                    gps_prec.append(g["precision"])
+                else:
+                    print("emptyval")
 
         camera_fps = json_data['frames/second']
         if skip_seconds != 0.0:
